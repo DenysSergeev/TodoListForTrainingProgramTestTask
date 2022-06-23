@@ -1,17 +1,20 @@
 import React from "react";
 import { RiCloseCircleLine } from "react-icons/ri";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const TodoItem = (props) => {
-    const { todo, removeTodo } = props;
+    const { todo, removeTodo, completeTodo } = props;
 
     return (
-        <div className="todo-row">
-            {props.todo.text}
+        <div className={todo.completeted ? "todo-row complete" : "todo-row"}>
+            {todo.text}
             <div className="iconsContainer">
                 <RiCloseCircleLine 
-                    className="icon"
                     onClick={() => removeTodo(todo.id)}
+                    style={{ marginRight: 5 }}
                 />
+
+                <BsFillCheckCircleFill onClick={() => completeTodo(todo.id)} />
             </div>
         </div>
     )
