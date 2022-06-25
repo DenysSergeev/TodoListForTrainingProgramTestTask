@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
 const TodoForm = (props) => {
-    
     const [input, setInput] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
         props.addTodo(input);
         setInput('');
     }
@@ -15,7 +14,7 @@ const TodoForm = (props) => {
         <input 
         onChange={(e) => setInput(e.target.value)}
         className="todo-input"
-        placeholder="Add some exercise" 
+        placeholder="Add new exercise" 
         value={input}
         />
         <button type="submit" className="todo-button">Add Todo</button> 

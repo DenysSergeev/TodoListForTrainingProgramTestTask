@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TodoForm from "./components/TodoForm";
-import "./App.css";
 import TodoItem from "./components/TodoItem";
+import "./App.css";
 
 
 function App() {
@@ -12,9 +12,8 @@ function App() {
     if(todos.length > 0) {
       id = todos[0].id + 1;
     }
-    let todo = {id: id, text: text, completed: false}
+    let todo = {id: id, text: text, completed: false, import: false}
     let newTodos = [todo, ...todos];
-    console.log(newTodos);
     setTodos(newTodos);
   }
   
@@ -33,17 +32,30 @@ function App() {
     setTodos(updatedTodos);
   }
 
+  const importantTodo = (id) => {
+    let updatedTodos = todos.map((todo) => {
+      if(todo.id === id) {
+        todo.important = !todo.important
+      }
+      return todo
+    })
+
+    setTodos(updatedTodos)
+  }
+  let sortedTodos = todos.sort((a, b) => b.important - a.important)
+
   return (
     <div className="todo-app">
       <h1>Todo List for training program</h1>
       <TodoForm addTodo={addTodo}/>
-      {todos.map((todo) => {
+      {sortedTodos.map((todo) => {
         return (
           <TodoItem 
             removeTodo={removeTodo} 
             todo={todo} 
             key={todo.id}
             completeTodo={completeTodo}
+            importantTodo={importantTodo}
           />
         )
       })}
