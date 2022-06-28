@@ -9,16 +9,20 @@ function App() {
 
   const addTodo = (text) => {
     let id = 1;
+
     if(todos.length > 0) {
       id = todos[0].id + 1;
     }
+
     let todo = {id: id, text: text, completed: false, import: false}
     let newTodos = [todo, ...todos];
+
     setTodos(newTodos);
   }
   
   const removeTodo = (id) => {
     let updatedTodos = [...todos].filter((todo) => todo.id !== id);
+
     setTodos(updatedTodos);
   }
 
@@ -29,6 +33,7 @@ function App() {
       }
       return todo;
     })
+
     setTodos(updatedTodos);
   }
 
@@ -42,6 +47,7 @@ function App() {
 
     setTodos(updatedTodos)
   }
+  
   let sortedTodos = todos.sort((a, b) => b.important - a.important)
 
   return (
